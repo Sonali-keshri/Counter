@@ -1,23 +1,34 @@
-import logo from './logo.svg';
-import './App.css';
+import "./App.css";
+import { useState, useEffect } from "react";
 
 function App() {
+  const [count, setCount] = useState(0);
+  const [isCounting, setIsCounting] = useState(false);
+
+  useEffect(() => {
+    let timer;
+    if (isCounting) {
+      timer = setInterval(() => {
+        setCount((prev) => prev + 1);
+      }, 1000);
+    }
+    return () => clearInterval(timer);
+  }, [isCounting]);
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div className="container">
+      <section className="wrapper">
+        <h1>Counter App</h1>
+        <h1>{count}</h1>
+        <div>
+          <button className="button start" onClick={() => setIsCounting(true)}>
+            Start
+          </button>
+          <button className="button stop" onClick={() => setIsCounting(false)}>
+            Stop
+          </button>
+        </div>
+      </section>
     </div>
   );
 }
