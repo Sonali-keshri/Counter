@@ -5,6 +5,8 @@ function App() {
   const [count, setCount] = useState(0);
   const [isCounting, setIsCounting] = useState(false);
 
+  console.log("craeting a new branch")
+  
   useEffect(() => {
     let timer;
     if (isCounting) {
